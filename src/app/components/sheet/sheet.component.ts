@@ -2,15 +2,16 @@ import { Component, Input, Output, OnInit, ElementRef, EventEmitter, ViewChild }
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { ManualTagsService } from '../tags-manual/manual-tags.service';
+import { ActorsTagsService } from '../tags-actors/actors-tags.service';
 
-import { StarRating, ImageElement } from '../../common/final-object.interface';
+import { StarRating, ImageElement, TagElement } from '../../common/final-object.interface';
 
 import { metaAppear, textAppear, modalAnimation } from '../../common/animations';
 import { YearEmission } from '../views/details/details.component';
 
 export interface TagEmission {
   index: number;
-  tag: string;
+  tag: TagElement;
   type: 'add' | 'remove';
 }
 
@@ -64,6 +65,7 @@ export class SheetComponent implements OnInit {
 
   constructor(
     public manualTagsService: ManualTagsService,
+    public actorsTagsService: ActorsTagsService,
     public sanitizer: DomSanitizer
   ) { }
 
@@ -89,7 +91,7 @@ export class SheetComponent implements OnInit {
     }
   }
 
-  addThisTag(tag: string) {
+  addThisTag(tag: TagElement) {
     if (this.video.tags && this.video.tags.includes(tag)) {
       // console.log('TAG ALREADY ADDED!');
     } else {
@@ -103,7 +105,7 @@ export class SheetComponent implements OnInit {
     }
   }
 
-  removeThisTag(tag: string) {
+  removeThisTag(tag: TagElement) {
     this.manualTagsService.removeTag(tag);
 
     this.editFinalArrayTag.emit({

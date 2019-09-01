@@ -1,0 +1,18 @@
+<div class="inputContainer">
+  <input
+    #tagInputField
+    class="inputFilter"
+    [ngClass]="{ 'dark-mode' : darkMode }"
+    (keyup.enter)="emitActor(currentText)"
+    (keyup.esc)="escape()"
+    [(ngModel)]="currentText"
+    (ngModelChange)="checkTypeahead($event)"
+    (keydown.Tab)="tabPressed($event)"
+    type="text"
+    placeholder="{{ 'TAGS.addActor' | translate }}"
+  >
+  <span class="typeahead" *ngIf="typeAhead.length > 0">
+    {{ typeAhead }}
+  </span>
+</div>
+

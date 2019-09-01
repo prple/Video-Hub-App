@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ManualTagsService } from './manual-tags.service';
 import { Tag } from '../tags-auto/tag-display.pipe';
+import { TagElement } from '../../common/final-object.interface';
 
 @Component({
   selector: 'app-view-tags-component',
@@ -52,13 +53,29 @@ export class ViewTagsComponent {
 
     tagList.forEach((tag) => {
       hackList.push({
-        name: tag,
+        tagElement: {name: tag, type: ''},
         colour: undefined,
         removable: false,
       });
     });
 
     return hackList;
+  }
+
+  tagElementToTagObject(tagList: TagElement[]): Tag[] {
+    console.log('converting TagElements to Tags');
+
+    const tagObjsList: Tag[] = [];
+
+    tagList.forEach((tag) => {
+      tagObjsList.push({
+        tagElement: tag,
+        colour: undefined,
+        removable: false
+      });
+    });
+
+    return tagObjsList;
   }
 
 }

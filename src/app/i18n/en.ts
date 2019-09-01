@@ -291,6 +291,7 @@ export const English = {
   },
   TAGS: {
     add                :'Add',
+    addActor           :'Add Actor',
     addSuccess         :'added successfully',
     addTag             :'Add tag',
     alreadyExists      :'tag already exists',

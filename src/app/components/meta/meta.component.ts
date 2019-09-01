@@ -2,13 +2,14 @@ import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectorRef, View
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { ManualTagsService } from '../tags-manual/manual-tags.service';
+import { ActorsTagsService } from '../tags-actors/actors-tags.service';
 
-import { StarRating, ImageElement } from '../../common/final-object.interface';
+import { StarRating, ImageElement, TagElement } from '../../common/final-object.interface';
 import { YearEmission } from '../views/details/details.component';
 
 export interface TagEmission {
   index: number;
-  tag: string;
+  tag: TagElement;
   type: 'add' | 'remove';
 }
 
@@ -28,6 +29,7 @@ export class MetaComponent implements OnInit {
 
   @Output() editFinalArrayStars = new EventEmitter<StarEmission>();
   @Output() editFinalArrayTag = new EventEmitter<TagEmission>();
+  @Output() editFinalArrayActors = new EventEmitter<TagEmission>();
   @Output() editFinalArrayYear = new EventEmitter<YearEmission>();
   @Output() filterTag = new EventEmitter<object>();
 
@@ -51,6 +53,7 @@ export class MetaComponent implements OnInit {
   constructor(
     private cd: ChangeDetectorRef,
     public manualTagsService: ManualTagsService,
+    public actorsTagsService: ActorsTagsService,
     public sanitizer: DomSanitizer
   ) { }
 
@@ -60,7 +63,7 @@ export class MetaComponent implements OnInit {
     this.yearHack = this.video.year;
   }
 
-  addThisTag(tag: string) {
+  addThisTag(tag: TagElement) {
     if (this.video.tags && this.video.tags.includes(tag)) {
       // console.log('TAG ALREADY ADDED!');
     } else {
@@ -79,7 +82,7 @@ export class MetaComponent implements OnInit {
     this.filterTag.emit(event);
   }
 
-  removeThisTag(tag: string) {
+  removeThisTag(tag: TagElement) {
     this.manualTagsService.removeTag(tag);
 
     this.editFinalArrayTag.emit({
@@ -90,6 +93,22 @@ export class MetaComponent implements OnInit {
     this.tagViewUpdateHack = !this.tagViewUpdateHack;
   }
 
+  /*
+  addThisActor(actor: string) {
+    if (this.video.actors && this.video.actors.includes(actor)) {
+        // Actor already in the list!
+    } else {
+      this.actorsTagsService.addTag(actor);
+
+      this.editFinalArrayActors.emit({
+        index: this.video.index,
+        tag: actor,
+        type: 'add'
+      });
+    }
+
+  }
+*/
   setStarRating(rating: StarRating): void {
     if (this.starRatingHack === rating) {
       rating = 0.5; // reset to "N/A" (not rated)

@@ -87,6 +87,11 @@
     [darkMode]="darkMode"
   ></app-add-tag-component>
 
+  <app-add-actor-component
+    (tag)="addThisTag($event)"
+    [darkMode]="darkMode"
+  ></app-add-actor-component>
+
   <br><br><br>  <!-- TODO -- stop using `<br>` here -->
 
   <app-view-tags-component

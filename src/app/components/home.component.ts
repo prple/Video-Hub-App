@@ -11,7 +11,7 @@ import { ShowLimitService } from '../pipes/show-limit.service';
 import { StarFilterService } from '../pipes/star-filter.service';
 import { WordFrequencyService } from '../pipes/word-frequency.service';
 
-import { FinalObject, ImageElement } from '../common/final-object.interface';
+import { FinalObject, ImageElement, TagElement } from '../common/final-object.interface';
 import { HistoryItem } from '../common/history-item.interface';
 import { ImportSettingsObject } from '../common/import.interface';
 import { ImportStage } from '../../../main-support';
@@ -1840,7 +1840,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
    * @param addTags
    * @param removeTags
    */
-  setTags(addTags: string[], removeTags: string[]): void {
+  setTags(addTags: TagElement[], removeTags: TagElement[]): void {
     this.tagsSaveService.restoreSavedTags(
       addTags ? addTags : [],
       removeTags ? removeTags : []

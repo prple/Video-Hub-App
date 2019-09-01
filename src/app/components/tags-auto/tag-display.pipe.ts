@@ -2,12 +2,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 import { autoFileTagsRegex } from './autotags.service';
 
-import { ImageElement } from '../../common/final-object.interface';
+import { ImageElement, TagElement } from '../../common/final-object.interface';
 
 import { Colors } from '../../common/colors';
 
 export interface Tag {
-  name: string;
+  tagElement: TagElement;
   colour: string;
   removable: boolean;
 }
@@ -30,7 +30,7 @@ export class TagsDisplayPipe implements PipeTransform {
     if (manualTags) {
       if (video.tags) {
         video.tags.forEach(tag => {
-          tags.push({name: tag, colour: Colors.manualTags, removable: true});
+          tags.push({tagElement: tag, colour: Colors.manualTags, removable: true});
         });
       }
     }
@@ -39,7 +39,14 @@ export class TagsDisplayPipe implements PipeTransform {
       const cleanedFileName: string = video.cleanName.toLowerCase().replace(autoFileTagsRegex, '');
       cleanedFileName.split(' ').forEach(word => {
         if (word.length >= 3) { // TODO - fix hardcoding ?
-          tags.push({name: word, colour: Colors.autoFileTags, removable: false});
+          tags.push({
+            tagElement: {
+              name: word,
+              type: 'auto'
+            },
+            colour: Colors.autoFileTags,
+            removable: false
+          });
         }
       });
     }
@@ -48,7 +55,14 @@ export class TagsDisplayPipe implements PipeTransform {
       const cleanedFileName: string = video.partialPath.toLowerCase().replace('.', '');
       cleanedFileName.split('/').forEach(word => {
         if (word.length >= 3) { // TODO - fix hardcoding ?
-          tags.push({name: word, colour: Colors.autoFolderTags, removable: false});
+          tags.push({
+            tagElement: {
+              name: word,
+              type: 'auto',
+            },
+            colour: Colors.autoFolderTags,
+            removable: false
+          });
         }
       });
     }

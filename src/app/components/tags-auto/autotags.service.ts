@@ -321,10 +321,10 @@ export class AutoTagsService {
     const allAddTags = this.tagsSaveService.getAddTags();
 
     allAddTags.forEach((tag) => {
-      if (tag.includes(' ')) {
-        this.twoWordFreqMap.set(tag, this.findMatches(tag));
+      if (tag.name.includes(' ')) {
+        this.twoWordFreqMap.set(tag.name, this.findMatches(tag.name));
       } else {
-        this.oneWordFreqMap.set(tag, this.findMatches(tag));
+        this.oneWordFreqMap.set(tag.name, this.findMatches(tag.name));
       }
     });
 
@@ -338,7 +338,7 @@ export class AutoTagsService {
     const allRemoveTags = this.tagsSaveService.getRemoveTags();
 
     allRemoveTags.forEach((tag) => {
-      if (tag.includes(' ')) {
+      if (tag.name.includes(' ')) {
         this.twoWordFreqMap.delete(tag);
       } else {
         this.oneWordFreqMap.delete(tag);

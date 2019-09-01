@@ -1,15 +1,16 @@
 import { ResolutionString } from '../pipes/resolution-filter.service';
 import { ScreenshotSettings } from '../../../main-globals';
+import { TagType } from '../components/tags-manual/manual-tags.service';
 
 export type StarRating = 0.5 | 1.5 | 2.5 | 3.5 | 4.5 | 5.5;
 
 export interface FinalObject {
-  addTags?: string[];           // tags to add
+  addTags?: TagElement[];           // tags to add
   hubName: string;              // the name of the hub -- for recently-opened
   images: ImageElement[];       // see below
   inputDir: string;             // later may support array of many input directories
   numOfFolders: number;         // number of folders
-  removeTags?: string[];        // tags to remove
+  removeTags?: TagElement[];        // tags to remove
   screenshotSettings: ScreenshotSettings;
   version: number;              // version of this vha file
 }
@@ -30,7 +31,7 @@ export interface ImageElement {
   // ========================================================================
   // OPTIONAL
   // ------------------------------------------------------------------------
-  tags?: string[];               // tags associated with this particular file
+  tags?: TagElement[];               // tags associated with this particular file
   year?: number;                 // optional tag to track the year of the video
   // ========================================================================
   // Stripped out and not saved in the VHA file
@@ -40,6 +41,11 @@ export interface ImageElement {
   index: number;                 // for the `default` sort order
   resBucket: number;             // the resolution category the video falls into (for faster sorting)
   resolution: ResolutionString;  // e.g. `720`, `1080`, `SD`, `HD`
+}
+
+export interface TagElement {
+  name: string;
+  type: TagType;
 }
 
 // Use this to create a new ImageElement if needed

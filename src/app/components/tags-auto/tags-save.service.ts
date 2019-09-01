@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { TagElement } from '../../common/final-object.interface';
 
 @Injectable()
 export class AutoTagsSaveService {
 
-  addTags: string[] = [];
-  removeTags: string[] = [];
+  addTags: TagElement[] = [];
+  removeTags: TagElement[] = [];
 
   needToSaveTags: boolean = false;
 
@@ -19,7 +20,7 @@ export class AutoTagsSaveService {
    * Add an `add` tag
    * @param tag
    */
-  public addAddTag(tag: string): void {
+  public addAddTag(tag: TagElement): void {
     this.needToSaveTags = true;
 
     const index = this.removeTags.indexOf(tag);
@@ -39,7 +40,7 @@ export class AutoTagsSaveService {
    * Add a `remove` tag
    * @param tag
    */
-  public addRemoveTag(tag: string): void {
+  public addRemoveTag(tag: TagElement): void {
     this.needToSaveTags = true;
 
     const index = this.addTags.indexOf(tag);
@@ -58,14 +59,14 @@ export class AutoTagsSaveService {
   /**
    * Get current add tags
    */
-  public getAddTags(): string[] {
+  public getAddTags(): TagElement[] {
     return this.addTags;
   }
 
   /**
    * get current remove tags
    */
-  public getRemoveTags(): string[] {
+  public getRemoveTags(): TagElement[] {
     return this.removeTags;
   }
 
@@ -74,7 +75,7 @@ export class AutoTagsSaveService {
    * @param savedAddTags
    * @param savedRemoveTags
    */
-  public restoreSavedTags(savedAddTags: string[], savedRemoveTags: string[]): void {
+  public restoreSavedTags(savedAddTags: TagElement[], savedRemoveTags: TagElement[]): void {
     this.addTags = savedAddTags;
     this.removeTags = savedRemoveTags;
     this.needToSaveTags = false;

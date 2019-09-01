@@ -12,6 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 
 // Services
+import { ActorsTagsService } from './components/tags-actors/actors-tags.service';
 import { AlphabetPrefixService } from './pipes/alphabet-prefix.service';
 import { AutoTagsSaveService } from './components/tags-auto/tags-save.service';
 import { AutoTagsService } from './components/tags-auto/autotags.service';
@@ -25,6 +26,7 @@ import { StarFilterService } from './pipes/star-filter.service';
 import { WordFrequencyService } from './pipes/word-frequency.service';
 
 // Components
+import { AddActorComponent } from './components/tags-actors/add-actor.component';
 import { AddTagComponent } from './components/tags-manual/add-tag.component';
 import { AppComponent } from './app.component';
 import { ClipComponent } from './components/views/clip/clip.component';
@@ -71,6 +73,7 @@ import { WrapperPipe } from './pipes/wrapper.pipe';
 @NgModule({
   declarations: [
     AddTagComponent,
+    AddActorComponent,
     AlphabetPrefixPipe,
     AppComponent,
     ClipComponent,
@@ -120,6 +123,7 @@ import { WrapperPipe } from './pipes/wrapper.pipe';
     VirtualScrollerModule,
   ],
   providers: [
+    ActorsTagsService,
     AlphabetPrefixService,
     AutoTagsSaveService,
     AutoTagsService,

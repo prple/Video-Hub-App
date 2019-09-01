@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 import { ManualTagsService } from '../components/tags-manual/manual-tags.service';
+import { TagElement } from '../common/final-object.interface';
 
 @Pipe({
   name: 'manualTagSortPipe'
@@ -18,13 +19,13 @@ export class ManualTagSortPipe implements PipeTransform {
    * @param sortByFrequency - if false, will sort alphabetically
    * @param forceUpdateHack - boolean that is toggled manually to force updating the list
    */
-  transform(allTags: string[], filterString: string, sortByFrequency: boolean, forceUpdateHack: boolean): string[] {
+  transform(allTags: TagElement[], filterString: string, sortByFrequency: boolean, forceUpdateHack: boolean): TagElement[] {
 
     if (filterString !== '') {
-      allTags = allTags.filter(tag => tag.includes(filterString));
+      allTags = allTags.filter(tag => tag.name.includes(filterString));
     }
 
-    let sortedTags: string[];
+    let sortedTags: TagElement[];
 
     if (sortByFrequency) {
 
@@ -34,7 +35,10 @@ export class ManualTagSortPipe implements PipeTransform {
         return this.manualTagService.tagsMap.get(a) < this.manualTagService.tagsMap.get(b) ? 1 : -1;
       }).slice();
     } else {
-      sortedTags = allTags.sort();
+      // Sortint alphabetically
+      sortedTags = allTags.sort((a, b): any => {
+        return a.name < b.name ? 1 : -1;
+      }).slice();
     }
 
     return sortedTags;

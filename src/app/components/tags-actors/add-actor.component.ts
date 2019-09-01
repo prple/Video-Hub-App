@@ -1,13 +1,13 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { ManualTagsService } from './manual-tags.service';
 import { TagElement } from '../../common/final-object.interface';
+import { ManualTagsService } from '../tags-manual/manual-tags.service';
 
 @Component({
-  selector: 'app-add-tag-component',
-  templateUrl: 'add-tag.component.html',
-  styleUrls: ['add-tag.component.scss']
+  selector: 'app-add-actor-component',
+  templateUrl: 'add-actor.component.html',
+  styleUrls: ['add-actor.component.scss']
 })
-export class AddTagComponent {
+export class AddActorComponent {
 
   @Input() darkMode: boolean;
 
@@ -24,7 +24,7 @@ export class AddTagComponent {
     if (text.trim()) { // if not empty
       this.tag.emit({
         name: text.trim(),
-        type: ''
+        type: 'actor'
       });
       this.currentText = '';
       this.typeAhead = '';

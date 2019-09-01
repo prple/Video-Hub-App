@@ -4,11 +4,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ManualTagsService } from '../../tags-manual/manual-tags.service';
 import { FilePathService } from '../file-path.service';
 
-import { StarRating, ImageElement } from '../../../common/final-object.interface';
+import { StarRating, ImageElement, TagElement } from '../../../common/final-object.interface';
 
 export interface TagEmission {
   index: number;
-  tag: string;
+  tag: TagElement;
   type: 'add' | 'remove';
 }
 
